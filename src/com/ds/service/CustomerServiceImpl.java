@@ -39,4 +39,11 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDAO.deleteCustomer(customerId);		
 	}
 
+	@Override
+	@Transactional
+	public List<Customer> searchCustomers(String searchName) {
+		// TODO Auto-generated method stub
+		return customerDAO.searchCustomers(searchName);
+	}
+
 }

@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 
 <html>
@@ -25,6 +26,12 @@
 			<input type="button" value="Add Customer"
 				onclick="window.location.href='showFormForAdd'; return false;"
 				class="add-button" />
+				<br>
+			<form:form action="search" method="GET">
+                Search customer: <input type="text" name="searchName" />
+
+				<input type="submit" value="Search" class="add-button" />
+			</form:form>
 
 			<!-- Add out html table here -->
 
@@ -44,7 +51,7 @@
 					<c:url var="updateLink" value="/customer/showFormForUpdate">
 						<c:param name="customerId" value="${customer.id}"></c:param>
 					</c:url>
-					
+
 					<c:url var="deleteLink" value="/customer/delete">
 						<c:param name="customerId" value="${customer.id}"></c:param>
 					</c:url>
@@ -52,11 +59,9 @@
 						<td>${customer.firstName}</td>
 						<td>${customer.lastName}</td>
 						<td>${customer.email}</td>
-						<td>
-						<a href="${updateLink}">Update</a> 
-						|
-						<a href="${deleteLink}"
-						onclick="if(!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a> 
+						<td><a href="${updateLink}">Update</a> | <a
+							href="${deleteLink}"
+							onclick="if(!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
 						</td>
 					</tr>
 				</c:forEach>
