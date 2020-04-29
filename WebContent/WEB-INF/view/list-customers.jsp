@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 	<div id="wrapper">
 		<div id="header">
 			<h2>CRM - Customer Relationship Manager</h2>
@@ -20,6 +21,11 @@
 	<div id="container">
 		<div id="content">
 
+
+			<input type="button" value="Add Customer"
+				onclick="window.location.href='showFormForAdd'; return false;"
+				class="add-button" />
+
 			<!-- Add out html table here -->
 
 			<table>
@@ -27,21 +33,36 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 
 				<!-- loop over and print our customers  -->
 
 				<c:forEach var="customer" items="${customers}">
+
+					<!-- Constructing an Update Link with Customer id  -->
+					<c:url var="updateLink" value="/customer/showFormForUpdate">
+						<c:param name="customerId" value="${customer.id}"></c:param>
+					</c:url>
+					
+					<c:url var="deleteLink" value="/customer/delete">
+						<c:param name="customerId" value="${customer.id}"></c:param>
+					</c:url>
 					<tr>
 						<td>${customer.firstName}</td>
 						<td>${customer.lastName}</td>
 						<td>${customer.email}</td>
+						<td>
+						<a href="${updateLink}">Update</a> 
+						|
+						<a href="${deleteLink}"
+						onclick="if(!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a> 
+						</td>
 					</tr>
 				</c:forEach>
 
 			</table>
-			
-			
+
 		</div>
 	</div>
 </body>
